@@ -7,6 +7,8 @@ const users = [
   { email: "valentine@stclaire.com", password: "1234", business: ["stclaire-valentine"] },
   { email: "bantu.maruthi990@gmail.com", password: "1234", business: ["phillys-cowley", "phillys-stclements", "ricks-diner", "stclaire-valentine"] },
 ];
+  { email: "sbenbakhti@gmail.com", password: "1234", business: ["phillys-cowley", "phillys-stclements", "ricks-diner", "stclaire-valentine"] },
+];
 
 function handleLogin(e) {
   e.preventDefault();
