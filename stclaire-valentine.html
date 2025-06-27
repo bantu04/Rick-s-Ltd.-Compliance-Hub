@@ -7,15 +7,15 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script>
-    // Prevent accessing dashboard without login
     if (!sessionStorage.getItem("loggedIn")) {
       window.location.href = "index.html";
     }
-  
-    // Force reload when back button is pressed
+
+    // 🚫 Prevent back-button return after logout
     window.addEventListener("pageshow", function (event) {
-      if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
-        location.reload();
+      const navType = performance.getEntriesByType("navigation")[0].type;
+      if (event.persisted || navType === "back_forward") {
+        window.location.reload();
       }
     });
   </script>
@@ -44,12 +44,11 @@
   <div class="logout">
     <button onclick="logout()">Logout</button>
   </div>
-
   <script>
-    function logout() {
+    document.getElementById("logout-btn").addEventListener("click", () => {
       sessionStorage.removeItem("loggedIn");
       window.location.href = "index.html";
-    }
+    });
   </script>
 </body>
 </html>
