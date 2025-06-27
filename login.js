@@ -44,6 +44,7 @@ function handleLogin(e) {
       btn.onclick = () => {
         sessionStorage.setItem("loggedIn", true);
         window.location.href = `${loc}.html`;
+        return false;
       };
       locationDiv.appendChild(btn);
     });
@@ -51,6 +52,7 @@ function handleLogin(e) {
     loginBox.appendChild(locationDiv);
   } else {
     window.location.href = `${user.business[0]}.html`;
+    return false;
   }
 
   return false;
