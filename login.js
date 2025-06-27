@@ -29,7 +29,6 @@ function handleLogin(e) {
 
   // Set session login flag
   sessionStorage.setItem("loggedIn", true);
-  sessionStorage.removeItem("loggedIn");
 
   // Admin with multiple locations
   if (user.business.length > 1) {
