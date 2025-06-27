@@ -7,15 +7,17 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script>
-    // ⛔ Prevent access if not logged in
+    // Prevent accessing dashboard without login
     if (!sessionStorage.getItem("loggedIn")) {
       window.location.href = "index.html";
     }
-    // 🛑 Block back button access after logout
-    window.history.pushState(null, null, window.location.href);
-    window.onpopstate = function () {
-      window.location.href = "index.html";
-    };
+  
+    // Force reload when back button is pressed
+    window.addEventListener("pageshow", function (event) {
+      if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
+        location.reload();
+      }
+    });
   </script>
 </head>
 <body class="form-dashboard">
