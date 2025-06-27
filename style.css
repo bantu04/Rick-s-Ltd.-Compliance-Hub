@@ -1,0 +1,296 @@
+/* ✅ style.css - Elegant + Fully Mobile-Responsive with Comments */
+
+/* --- Global Styles --- */
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #eedc9a;
+  color: #f9f9f9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  text-align: center;
+  overflow-x: hidden; /* Prevent side scroll */
+}
+
+/* 🔵 Main Header Bar */
+.main-header {
+  /* width: 100%; */
+  /* background: #0f172a; Dark royal navy */
+  color: #9e1818;       /* Royal gold */
+  padding: 1rem 0.5rem;
+  text-align: center;
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.4); */
+}
+
+.main-header h1 {
+  margin: 0;
+  font-size: 3rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+}
+
+.main-header h1 span {
+  color: #ffffff;
+  font-weight: 400;
+}
+
+/* 🔵 Login Only Page Layout */
+body.login-only {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 2rem;
+}
+
+/* 🔵 Login Box Styling */
+.login-box {
+  background: #1c2238;
+  padding: 1.5rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 340px;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+  border: 1px solid #2d3250;
+  margin: 2rem auto;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.login-box input,
+.login-box button {
+  width: 90%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;   /* <-- This adds spacing between inputs */
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.login-box button {
+  width: 70%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;   /* <-- This adds spacing between inputs */
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.login-box button {
+  background: #d4af37;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-box button:hover {
+  transform: scale(1.03);
+}
+
+#error-msg {
+  color: red;
+  font-size: 0.9rem;
+  animation: shake 0.4s ease-in-out;
+}
+
+/* 🔵 Header Styling */
+.header {
+  /* background: #1c2238; */
+  padding: 1rem 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #2d3250;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  color: #d4af37;
+  margin: 0;
+}
+
+.header img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+/* 🔵 Dashboard Container */
+.form-dashboard {
+  padding: 1rem;
+  background: #6f8a88;
+  text-align: center;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 🔵 Form Grid Layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* 🔵 Individual Form Button Styling */
+.form-card {
+  background: #1c2238;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #f9f9f9;
+  border: 1px solid #2d3250;
+  transition: 0.3s;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.form-card:hover {
+  border-color: #d4af37;
+  transform: scale(1.02);
+}
+
+.form-card i {
+  color: #d4af37;
+  font-size: 1.1rem;
+}
+
+/* 🔵 Location Buttons (Admin) */
+.location-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.location-buttons button {
+  background: #d4af37;
+  color: #000;
+  font-weight: 600;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* 🔵 Logout Button Styling */
+.logout {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.logout button {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  background: #d4af37;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout button:hover {
+  transform: scale(1.05);
+}
+
+/* 🔵 Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+/* 🔵 Mobile Optimisation */
+@media (max-width: 480px) {
+  body {
+    padding: 0.5rem;
+    align-items: stretch;
+  }
+
+  .main-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    /* font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.6); */
+  }
+
+  body.login-only {
+    padding: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .login-box {
+    width: 100%;
+    max-width: 100%;
+    margin: 2rem auto;
+    padding: 1.5rem 1rem;
+    box-sizing: border-box;
+    border-radius: 12px;
+  }
+
+  .login-box input,
+  .login-box button {
+    font-size: 1rem;
+    padding: 0.75rem;
+  }
+
+  .login-box button {
+    width: 100%;
+  }
+
+  .header h1 {
+    font-size: 1.4rem;
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .form-dashboard {
+    padding: 1rem;
+  }
+
+  .form-grid {
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .form-card {
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .location-buttons button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .logout button {
+    margin-top: 10px;
+    width: 40%;
+  }
+}

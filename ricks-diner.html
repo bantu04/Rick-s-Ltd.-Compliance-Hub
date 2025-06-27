@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rick's Diner</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script>
+    if (!sessionStorage.getItem("loggedIn")) {
+      window.location.href = "index.html";
+    }
+    window.history.pushState(null, null, window.location.href);
+    window.onpopstate = function () {
+      window.location.href = "index.html";
+    };
+  </script>
+</head>
+<body class="form-dashboard">
+  <div class="header">
+    <img src="https://via.placeholder.com/40?text=R" alt="Rick's Logo">
+    <h1>Rick's Diner</h1>
+  </div>
+
+  <div class="form-grid">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdpnjVgvGILWD-1y1ZevompQSIkJlcFSfSwOScgtxx2x8EMfw/viewform?usp=header" class="form-card">
+      <i class="fas fa-temperature-high"></i> Fridge Temperature Check
+    </a>
+    <a href="https://forms.gle/clean" class="form-card">
+      <i class="fas fa-broom"></i> Cleaning Schedule
+    </a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf6745HWYbUr5QYEbAhCec2I9q1wVdmfvLWMmDyvMn479hJjg/viewform?usp=header" class="form-card">
+      <i class="fas fa-door-open"></i> Opening Checklist
+    </a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfgqymmVGo1ZEZBzLLxEh1iZIwWFeNk0CaL_IDmC4S2wJ0PHg/viewform?usp=header" class="form-card">
+      <i class="fas fa-door-closed"></i> Closing Checklist
+    </a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeS8hf5Dry9uFMAei8uSfbd091ku2PEYI6rT29lqgsgvKdPng/viewform?usp=header" class="form-card">
+      <i class="fas fa-door-closed"></i> Chicken Breading Station
+    </a>
+  </div>
+
+  <div class="logout">
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    function logout() {
+      sessionStorage.removeItem("loggedIn");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

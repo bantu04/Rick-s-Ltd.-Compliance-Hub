@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Philly's – St. Clements</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script>
+    if (!sessionStorage.getItem("loggedIn")) {
+      window.location.href = "index.html";
+    }
+    window.history.pushState(null, null, window.location.href);
+    window.onpopstate = function () {
+      window.location.href = "index.html";
+    };
+  </script>
+</head>
+<body class="form-dashboard">
+  <div class="header">
+    <img src="https://via.placeholder.com/40?text=P" alt="Phillys Logo">
+    <h1>Philly's – St. Clements</h1>
+  </div>
+
+  <div class="form-grid">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSevX70Qtco-mzOEiGJsGy-MfSPhUAw0gjhrw6uQ1sWH3I9BRQ/viewform?usp=header" class="form-card">
+      <i class="fas fa-temperature-high"></i> Fridge Temperature Check
+    </a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdRlPEBQDxiuw3deJJR6Ae6J5gwt8S4roxEUC7QFlCKNW_GJg/viewform?usp=header" class="form-card">
+      <i class="fas fa-broom"></i> Clean Breading Station
+    </a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeS28TfJ3RpMjEBFrz8volwG5QTRFwYeXqqDA3wsXnMJmLlRQ/viewform?usp=header" class="form-card">
+      <i class="fas fa-door-open"></i> Daily Wastage Form
+    </a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdsbLwJR4jC2dGQazHPgBCmcEmh80gVAKAW5du_7VAcIdBbIQ/viewform?usp=header" class="form-card">
+      <i class="fas fa-door-closed"></i> Closing Checklist
+    </a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZ_Ik4j-hrYbtkMnneuAcBOaOWtp2TLSBwmNBjoYd3nn13ew/viewform?usp=header" class="form-card">
+      <i class="fas fa-door-closed"></i> Opening Checklist
+    </a>
+  </div>
+
+  <div class="logout">
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    function logout() {
+      sessionStorage.removeItem("loggedIn");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
