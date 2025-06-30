@@ -1,6 +1,7 @@
+/* ✅ login.js - improved login + greeting + Google Sheet logging (GET) */
+
 const webhookURL = "https://script.google.com/macros/s/AKfycby4XTQaWdDtuccnop3GxZE9xfgGFzi207DPlDoaYzd0qbmpp2T6qWLXcQNfELRggaHI/exec";
 
-// ✅ All users now have `name` field
 const users = [
   { email: "cowley@phillys.com", password: "1234", name: "Cowley", business: ["phillys-cowley"] },
   { email: "stclements@phillys.com", password: "1234", name: "St Clements", business: ["phillys-stclements"] },
@@ -10,7 +11,6 @@ const users = [
   { email: "sbenbakhti@gmail.com", password: "1234", name: "Sami", business: ["phillys-cowley", "phillys-stclements", "ricks-diner", "stclaire-valentine"] },
 ];
 
-// ✅ Rotating motivational messages
 const quotes = [
   "You're unstoppable today!",
   "Crushing it as always!",
@@ -31,7 +31,6 @@ function handleLogin(e) {
   const errorMsg = document.getElementById("error-msg");
 
   const user = users.find(u => u.email === email && u.password === password);
-
   if (!user) {
     errorMsg.innerText = "Invalid credentials.";
     errorMsg.classList.add("shake");
@@ -39,65 +38,53 @@ function handleLogin(e) {
     return false;
   }
 
-  // ✅ Save login flag
   sessionStorage.setItem("loggedIn", true);
-
-  // ✅ Log login to Google Sheet
-  const firstBusiness = user.business.length > 1 ? "MULTI (choice shown)" : user.business[0];
-  console.log("Sending to Google Sheet:", webhookURL, user.email, loc);
-  fetch(webhookURL, {
-    method: "POST",
-    body: JSON.stringify({
-      email: user.email,
-      business: firstBusiness
-    }),
-    headers: { "Content-Type": "application/json" }
-  });
-
-  // ✅ Show personal greeting popup
   showGreeting(user);
-
   return false;
 }
 
 function showGreeting(user) {
   const loginBox = document.querySelector(".login-box");
   const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-
   loginBox.innerHTML = `
     <div class="popup">
       <h2>Hey ${user.name} 👋</h2>
+      <p>How are you feeling today?</p>
       <p class="quote">"${randomQuote}"</p>
       <button class="ok-btn">Okay</button>
     </div>
   `;
-
-  document.querySelector(".ok-btn").onclick = () => {
-    showLocationButtons(user);
-  };
+  document.querySelector(".ok-btn").onclick = () => showLocationButtons(user);
 }
 
 function showLocationButtons(user) {
   const loginBox = document.querySelector(".login-box");
   loginBox.innerHTML = `<h3>Select Location</h3>`;
-
   const container = document.createElement("div");
   container.className = "location-buttons";
 
+  // Single business case
+  if (user.business.length === 1) {
+    const loc = user.business[0];
+    // Log and redirect
+    fetch(`${webhookURL}?email=${encodeURIComponent(user.email)}&business=${encodeURIComponent(loc)}`)
+      .then(res => res.text())
+      .then(data => console.log("Logged:", data))
+      .catch(err => console.error("Log failed:", err));
+
+    window.location.href = `${loc}.html`;
+    return;
+  }
+
+  // Multiple business case
   user.business.forEach(loc => {
     const btn = document.createElement("button");
     btn.innerText = loc.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     btn.onclick = () => {
-      // ✅ Log which location they clicked (if multiple)
-      console.log("Sending to Google Sheet:", webhookURL, user.email, loc);
-      fetch(webhookURL, {
-        method: "POST",
-        body: JSON.stringify({
-          email: user.email,
-          business: loc
-        }),
-        headers: { "Content-Type": "application/json" }
-      });
+      fetch(`${webhookURL}?email=${encodeURIComponent(user.email)}&business=${encodeURIComponent(loc)}`)
+        .then(res => res.text())
+        .then(data => console.log("Logged:", data))
+        .catch(err => console.error("Log failed:", err));
 
       sessionStorage.setItem("loggedIn", true);
       window.location.href = `${loc}.html`;
@@ -106,14 +93,4 @@ function showLocationButtons(user) {
   });
 
   loginBox.appendChild(container);
-}
-
-function showError() {
-  const errorBox = document.getElementById('error-msg');
-  errorBox.textContent = 'Invalid credentials';
-  errorBox.classList.add('shake');
-
-  setTimeout(() => {
-    errorBox.classList.remove('shake');
-  }, 400);
 }
