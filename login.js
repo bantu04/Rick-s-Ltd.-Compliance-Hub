@@ -1,6 +1,6 @@
 /* ✅ login.js - smart login handler with session tracking + greeting + logging */
 
-const webhookURL = "https://script.google.com/macros/s/AKfycbyHMUU7gVOnN3LXRCOfG3zGyarqzDpxOAfqIhug4z2yIfVjwiKaKbWBnad4KvDdtz0w/exec";
+const webhookURL = "https://script.google.com/macros/s/AKfycby4XTQaWdDtuccnop3GxZE9xfgGFzi207DPlDoaYzd0qbmpp2T6qWLXcQNfELRggaHI/exec";
 
 // ✅ All users now have `name` field
 const users = [
