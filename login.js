@@ -66,7 +66,7 @@ function showLocationButtons(user) {
   if (user.business.length === 1) {
     const loc = user.business[0];
     // Log and redirect
-    fetch(`${webhookURL}?email=${encodeURIComponent(user.email)}&business=${encodeURIComponent(loc)}`)
+    fetch(`${webhookURL}?email=${encodeURIComponent(user.email)}&name=${encodeURIComponent(user.name)}&business=${encodeURIComponent(loc)}`)
       .then(res => res.text())
       .then(data => console.log("Logged:", data))
       .catch(err => console.error("Log failed:", err));
@@ -80,14 +80,15 @@ function showLocationButtons(user) {
     const btn = document.createElement("button");
     btn.innerText = loc.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     btn.onclick = () => {
-      fetch(`${webhookURL}?email=${encodeURIComponent(user.email)}&business=${encodeURIComponent(loc)}`)
+      fetch(`${webhookURL}?email=${encodeURIComponent(user.email)}&name=${encodeURIComponent(user.name)}&business=${encodeURIComponent(loc)}`)
         .then(res => res.text())
         .then(data => console.log("Logged:", data))
         .catch(err => console.error("Log failed:", err));
-
+    
       sessionStorage.setItem("loggedIn", true);
       window.location.href = `${loc}.html`;
     };
+
     container.appendChild(btn);
   });
 
