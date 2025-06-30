@@ -46,6 +46,7 @@ function handleLogin(e) {
 
   // ✅ Log login to Google Sheet
   const firstBusiness = user.business.length > 1 ? "MULTI (choice shown)" : user.business[0];
+  console.log("Sending to Google Sheet:", webhookURL, user.email, loc);
   fetch(webhookURL, {
     method: "POST",
     body: JSON.stringify({
@@ -90,6 +91,7 @@ function showLocationButtons(user) {
     btn.innerText = loc.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     btn.onclick = () => {
       // ✅ Log which location they clicked (if multiple)
+      console.log("Sending to Google Sheet:", webhookURL, user.email, loc);
       fetch(webhookURL, {
         method: "POST",
         body: JSON.stringify({
