@@ -4,7 +4,7 @@ const webhookURL = "https://script.google.com/macros/s/AKfycbzdB6oglQvB5MNBy_5Od
 
 // ✅ All users with names
 const users = [
-  { email: "cowley@phillys.com", password: "1234", name: "Cowley", business: ["phillys-cowley"] },
+  { email: "India.chambers11@gmail.com", password: "24/05/2004", name: "India", business: ["stclaire-valentine"] },
   { email: "stclements@phillys.com", password: "1234", name: "St Clements", business: ["phillys-stclements"] },
   { email: "rick@diner.com", password: "1234", name: "Rick", business: ["ricks-diner"] },
   { email: "valentine@stclaire.com", password: "1234", name: "Valentine", business: ["stclaire-valentine"] },
