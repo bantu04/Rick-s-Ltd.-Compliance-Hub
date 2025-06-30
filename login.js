@@ -1,8 +1,8 @@
-/* ✅ login.js - Full smart login with greeting, name-based logging, and Sheet tracking */
+/* ✅ login.js - full smart login with name logging and validation */
 
 const webhookURL = "https://script.google.com/macros/s/AKfycbzdB6oglQvB5MNBy_5OdsYmkDWI9f74Vo5XzvtixvbUNA7FjgQuVZv1ex16Bxay78z_/exec";
 
-// ✅ All users now have a name
+// ✅ All users with names
 const users = [
   { email: "cowley@phillys.com", password: "1234", name: "Cowley", business: ["phillys-cowley"] },
   { email: "stclements@phillys.com", password: "1234", name: "St Clements", business: ["phillys-stclements"] },
@@ -12,7 +12,7 @@ const users = [
   { email: "sbenbakhti@gmail.com", password: "1234", name: "Sami", business: ["phillys-cowley", "phillys-stclements", "ricks-diner", "stclaire-valentine"] },
 ];
 
-// ✅ Motivational quotes
+// ✅ Quotes
 const quotes = [
   "You're unstoppable today!",
   "Crushing it as always!",
@@ -26,7 +26,7 @@ const quotes = [
   "You’re leading with passion – keep going!"
 ];
 
-// ✅ Login form handler
+// ✅ Login handler
 function handleLogin(e) {
   e.preventDefault();
 
@@ -48,7 +48,7 @@ function handleLogin(e) {
   return false;
 }
 
-// ✅ Show greeting popup
+// ✅ Greeting popup
 function showGreeting(user) {
   const loginBox = document.querySelector(".login-box");
   const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
@@ -56,6 +56,7 @@ function showGreeting(user) {
   loginBox.innerHTML = `
     <div class="popup">
       <h2>Hey ${user.name} 👋</h2>
+      <p>How are you feeling today?</p>
       <p class="quote">"${randomQuote}"</p>
       <button class="ok-btn">Okay</button>
     </div>
@@ -64,7 +65,7 @@ function showGreeting(user) {
   document.querySelector(".ok-btn").onclick = () => showLocationButtons(user);
 }
 
-// ✅ Show location buttons (single or multiple)
+// ✅ Show business locations
 function showLocationButtons(user) {
   const loginBox = document.querySelector(".login-box");
   loginBox.innerHTML = `<h3>Select Location</h3>`;
@@ -95,9 +96,16 @@ function showLocationButtons(user) {
   loginBox.appendChild(container);
 }
 
-// ✅ Log to Google Sheet
+// ✅ Logging function (prevents "Unknown")
 function logToSheet(email, name, business) {
-  fetch(`${webhookURL}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}&business=${encodeURIComponent(business)}`)
+  if (!email || !name || !business) {
+    console.warn("Missing data, not logging:", { email, name, business });
+    return;
+  }
+
+  const url = `${webhookURL}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}&business=${encodeURIComponent(business)}`;
+
+  fetch(url)
     .then(res => res.text())
     .then(data => console.log("Logged:", data))
     .catch(err => console.error("Log failed:", err));
