@@ -223,6 +223,51 @@ body.login-only {
   100% { transform: translateX(0); }
 }
 
+/* 🎉 Greeting Popup */
+.popup {
+  background: #1c2238;
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  color: #f9f9f9;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  animation: fadeIn 0.4s ease;
+}
+
+.popup h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #d4af37;
+}
+
+.popup p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.popup .quote {
+  font-style: italic;
+  margin: 1rem 0;
+  color: #ffffff;
+}
+
+.ok-btn {
+  padding: 0.6rem 1.25rem;
+  border: none;
+  border-radius: 10px;
+  background: #d4af37;
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.ok-btn:hover {
+  transform: scale(1.05);
+}
+
 /* 🔵 Mobile Optimisation */
 @media (max-width: 480px) {
   body {
