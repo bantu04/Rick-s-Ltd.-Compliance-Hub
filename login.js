@@ -31,12 +31,12 @@ const quotes = [
 function handleLogin(e) {
   e.preventDefault();
 
-  const email = document.getElementById("email").value.trim();
+  const email = document.getElementById("email").value.trim().toLowerCase();
   const password = document.getElementById("password").value.trim();
   const errorMsg = document.getElementById("error-msg");
 
-  const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
-
+  const user = users.find(u => u.email.toLowerCase() === email && u.password === password);
+  
   if (!user) {
     errorMsg.innerText = "Invalid credentials.";
     errorMsg.classList.add("shake");
