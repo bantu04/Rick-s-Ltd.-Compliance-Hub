@@ -1,6 +1,6 @@
 /* ✅ login.js - improved login + greeting + Google Sheet logging (GET) */
 
-const webhookURL = "https://script.google.com/macros/s/AKfycby4XTQaWdDtuccnop3GxZE9xfgGFzi207DPlDoaYzd0qbmpp2T6qWLXcQNfELRggaHI/exec";
+const webhookURL = "https://script.google.com/macros/s/AKfycbw3VIaZKNaSNUd1-hnt4RbQu1Zsmjh8NtUDPx0CCUGe5hGGHdUFWB1lEo2dGHPgIGHv/exec";
 
 const users = [
   { email: "cowley@phillys.com", password: "1234", name: "Cowley", business: ["phillys-cowley"] },
