@@ -10,24 +10,23 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script>
-    // 🔐 Redirect if not logged in
     if (!sessionStorage.getItem("loggedIn")) {
       window.location.href = "index.html";
+    } else {
+      document.body.style.display = "block";
     }
   
-    // 🔐 Force reload to clear cache and prevent back navigation
     window.addEventListener("pageshow", function (event) {
       const navType = performance.getEntriesByType("navigation")[0]?.type;
   
-      // Force redirect if page was accessed via back button OR not logged in
       if (!sessionStorage.getItem("loggedIn") || event.persisted || navType === "back_forward") {
-        sessionStorage.clear(); // just in case
+        sessionStorage.clear();
         window.location.href = "index.html";
       }
     });
   </script>
 </head>
-<body class="form-dashboard">
+<body style="display:none" class="form-dashboard">
   <div class="header">
     <img src="https://via.placeholder.com/40?text=R" alt="Rick's Logo">
     <h1>Rick's Diner</h1>
