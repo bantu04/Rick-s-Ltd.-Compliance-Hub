@@ -10,21 +10,22 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script>
-    if (!sessionStorage.getItem("loggedIn")) {
-      window.location.href = "stclaire-valentine.html";
-    } else {
-      document.body.style.display = "block";
-    }
-  
-    window.addEventListener("pageshow", function (event) {
-      const navType = performance.getEntriesByType("navigation")[0]?.type;
-  
-      if (!sessionStorage.getItem("loggedIn") || event.persisted || navType === "back_forward") {
-        sessionStorage.clear();
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!sessionStorage.getItem("loggedIn")) {
         window.location.href = "index.html";
+      } else {
+        document.body.style.display = "block";
       }
+  
+      window.addEventListener("pageshow", event => {
+        const navType = performance.getEntriesByType("navigation")[0]?.type;
+        if (!sessionStorage.getItem("loggedIn") || navType === "back_forward" || event.persisted) {
+          sessionStorage.clear();
+          window.location.href = "index.html";
+        }
+      });
     });
-  </script>
+</script>
 </head>
 <body style="display:none" class="form-dashboard">
   <div class="header">
