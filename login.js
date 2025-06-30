@@ -49,7 +49,6 @@ function showGreeting(user) {
   loginBox.innerHTML = `
     <div class="popup">
       <h2>Hey ${user.name} 👋</h2>
-      <p>How are you feeling today?</p>
       <p class="quote">"${randomQuote}"</p>
       <button class="ok-btn">Okay</button>
     </div>
