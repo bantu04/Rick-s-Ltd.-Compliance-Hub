@@ -1,7 +1,8 @@
-/* ✅ login.js - improved login + greeting + Google Sheet logging (GET) */
+/* ✅ login.js - Full smart login with greeting, name-based logging, and Sheet tracking */
 
-const webhookURL = "https://script.google.com/macros/s/AKfycbw3VIaZKNaSNUd1-hnt4RbQu1Zsmjh8NtUDPx0CCUGe5hGGHdUFWB1lEo2dGHPgIGHv/exec";
+const webhookURL = "https://script.google.com/macros/s/AKfycbzdB6oglQvB5MNBy_5OdsYmkDWI9f74Vo5XzvtixvbUNA7FjgQuVZv1ex16Bxay78z_/exec";
 
+// ✅ All users now have a name
 const users = [
   { email: "cowley@phillys.com", password: "1234", name: "Cowley", business: ["phillys-cowley"] },
   { email: "stclements@phillys.com", password: "1234", name: "St Clements", business: ["phillys-stclements"] },
@@ -11,6 +12,7 @@ const users = [
   { email: "sbenbakhti@gmail.com", password: "1234", name: "Sami", business: ["phillys-cowley", "phillys-stclements", "ricks-diner", "stclaire-valentine"] },
 ];
 
+// ✅ Motivational quotes
 const quotes = [
   "You're unstoppable today!",
   "Crushing it as always!",
@@ -24,13 +26,16 @@ const quotes = [
   "You’re leading with passion – keep going!"
 ];
 
+// ✅ Login form handler
 function handleLogin(e) {
   e.preventDefault();
+
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
   const errorMsg = document.getElementById("error-msg");
 
   const user = users.find(u => u.email === email && u.password === password);
+
   if (!user) {
     errorMsg.innerText = "Invalid credentials.";
     errorMsg.classList.add("shake");
@@ -43,9 +48,11 @@ function handleLogin(e) {
   return false;
 }
 
+// ✅ Show greeting popup
 function showGreeting(user) {
   const loginBox = document.querySelector(".login-box");
   const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
   loginBox.innerHTML = `
     <div class="popup">
       <h2>Hey ${user.name} 👋</h2>
@@ -53,38 +60,31 @@ function showGreeting(user) {
       <button class="ok-btn">Okay</button>
     </div>
   `;
+
   document.querySelector(".ok-btn").onclick = () => showLocationButtons(user);
 }
 
+// ✅ Show location buttons (single or multiple)
 function showLocationButtons(user) {
   const loginBox = document.querySelector(".login-box");
   loginBox.innerHTML = `<h3>Select Location</h3>`;
+
   const container = document.createElement("div");
   container.className = "location-buttons";
 
-  // Single business case
   if (user.business.length === 1) {
     const loc = user.business[0];
-    // Log and redirect
-    fetch(`${webhookURL}?email=${encodeURIComponent(user.email)}&name=${encodeURIComponent(user.name)}&business=${encodeURIComponent(loc)}`)
-      .then(res => res.text())
-      .then(data => console.log("Logged:", data))
-      .catch(err => console.error("Log failed:", err));
-
+    logToSheet(user.email, user.name, loc);
     window.location.href = `${loc}.html`;
     return;
   }
 
-  // Multiple business case
   user.business.forEach(loc => {
     const btn = document.createElement("button");
     btn.innerText = loc.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+
     btn.onclick = () => {
-      fetch(`${webhookURL}?email=${encodeURIComponent(user.email)}&name=${encodeURIComponent(user.name)}&business=${encodeURIComponent(loc)}`)
-        .then(res => res.text())
-        .then(data => console.log("Logged:", data))
-        .catch(err => console.error("Log failed:", err));
-    
+      logToSheet(user.email, user.name, loc);
       sessionStorage.setItem("loggedIn", true);
       window.location.href = `${loc}.html`;
     };
@@ -93,4 +93,12 @@ function showLocationButtons(user) {
   });
 
   loginBox.appendChild(container);
+}
+
+// ✅ Log to Google Sheet
+function logToSheet(email, name, business) {
+  fetch(`${webhookURL}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}&business=${encodeURIComponent(business)}`)
+    .then(res => res.text())
+    .then(data => console.log("Logged:", data))
+    .catch(err => console.error("Log failed:", err));
 }
