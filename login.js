@@ -8,6 +8,7 @@ const users = [
   { email: "mdaullah86@gmail.com", password: "1986", name: "Ahsan", business: ["stclaire-valentine"] },
   { email: "stclements@phillys.com", password: "1234", name: "St Clements", business: ["phillys-stclements"] },
   { email: "rick@diner.com", password: "1234", name: "Rick", business: ["ricks-diner"] },
+  { email: "toprakcideniz@gmail.com", password: "1995", name: "Rick", business: ["ricks-diner"] },
   { email: "sonaruksha97@gmail.com", password: "1997", name: "Sona", business: ["ricks-diner"] },
   { email: "valentine@stclaire.com", password: "1234", name: "Valentine", business: ["stclaire-valentine"] },
   { email: "bantu.maruthi990@gmail.com", password: "1999", name: "Bantu", business: ["phillys-cowley", "phillys-stclements", "ricks-diner", "stclaire-valentine"] },
