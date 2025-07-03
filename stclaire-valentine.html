@@ -32,21 +32,26 @@
     <img src="https://via.placeholder.com/40?text=S" alt="St. Claire Logo">
     <h1>St. Claire – Valentine</h1>
   </div>
+  <div class="expiry-tab">
+    <p>Cooked Date: <strong id="cook-date"></strong></p>
+    <p>Disposal Date: <strong id="disposal-date"></strong></p>
+  </div>
+
 
   <div class="form-grid">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5Q-cNTZkM6eKG_miBwT0GN23rMjpruxF-v7OpGLByExUibg/viewform?usp=header" class="form-card">
-      <i class="fas fa-temperature-high"></i> Fridge Temperature Check - Kitchen
+      <i class="fas fa-temperature-high" target="_blank" ></i> Fridge Temperature Check - Kitchen
     </a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSdezfFD6-KSLKzbl_kFgxLvM1NuF_PFRz2qgNWmjLDwNIUthw/viewform?usp=header" class="form-card">
-      <i class="fas fa-temperature-high"></i> Fridge Temperature Check - Shop Floor
+      <i class="fas fa-temperature-high" target="_blank" ></i> Fridge Temperature Check - Shop Floor
     </a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScO7xIG44nDlKoi4ZfL8oy9vf6rVUVIfz-XV_JwR8ZeM9KblQ/viewform?usp=header" class="form-card">
-      <i class="fas fa-broom"></i> Toilet Cleaning Check
+      <i class="fas fa-broom"target="_blank"></i> Toilet Cleaning Check
     </a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSdUmVpwII0XWN_VmbHZ2nQfJjnqjau7XUQoRVBtkHcV1ZeS7g/viewform?usp=header" class="form-card">
-      <i class="fas fa-door-open"></i> Opening Checklist
+      <i class="fas fa-door-open" target="_blank"></i> Opening Checklist
     </a>
-    <a href="https://forms.gle/close" class="form-card">
+    <a href="https://forms.gle/close" class="form-card" target="_blank" >
       <i class="fas fa-door-closed"></i> Closing Checklist
     </a>
   </div>
@@ -60,5 +65,20 @@
       window.location.href = "index.html";
     });
   </script>
+  <script>
+    function formatTCode(date) {
+      const shortDay = date.toLocaleDateString('en-GB', { weekday: 'short' })[0].toUpperCase();
+      const num = date.getDate() + (date.getMonth() + 1); // Month is 0-indexed
+      return `${shortDay}${num}`;
+    }
+  
+    const today = new Date();
+    const disposal = new Date(today);
+    disposal.setDate(today.getDate() + 3);
+  
+    document.getElementById("cook-date").textContent = formatTCode(today);
+    document.getElementById("disposal-date").textContent = formatTCode(disposal);
+  </script>
+
 </body>
 </html>
