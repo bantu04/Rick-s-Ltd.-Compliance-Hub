@@ -66,19 +66,26 @@
     });
   </script>
   <script>
-    function formatTCode(date) {
-      const shortDay = date.toLocaleDateString('en-GB', { weekday: 'short' })[0].toUpperCase();
-      const num = date.getDate() + (date.getMonth() + 1); // Month is 0-indexed
-      return `${shortDay}${num}`;
+    function formatTCodeWithFullDate(date) {
+      const dayCode = date.toLocaleDateString('en-GB', { weekday: 'short' })[0].toUpperCase();
+      const tCode = dayCode + (date.getDate() + (date.getMonth() + 1));
+      const fullDate = date.toLocaleDateString('en-GB', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: '2-digit'
+      });
+      return `${tCode} – ${fullDate}`;
     }
   
     const today = new Date();
-    const disposal = new Date(today);
+    const disposal = new Date();
     disposal.setDate(today.getDate() + 2);
   
-    document.getElementById("cook-date").textContent = formatTCode(today);
-    document.getElementById("disposal-date").textContent = formatTCode(disposal);
-  </script>
+    document.getElementById("cook-date").textContent = formatTCodeWithFullDate(today);
+    document.getElementById("disposal-date").textContent = formatTCodeWithFullDate(disposal);
+</script>
+
 
 </body>
 </html>
