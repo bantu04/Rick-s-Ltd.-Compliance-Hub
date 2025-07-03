@@ -62,7 +62,7 @@ function showGreeting(user) {
     <div class="popup">
       <h2>Hey ${user.name} 👋</h2>
       <p class="quote">"${randomQuote}"</p>
-      <button class="ok-btn">Okay</button>
+      <button class="ok-btn">Click to Proceed</button>
     </div>
   `;
 
