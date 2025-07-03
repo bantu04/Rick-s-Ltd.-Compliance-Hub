@@ -268,6 +268,21 @@ body.login-only {
   transform: scale(1.05);
 }
 
+.expiry-tab {
+  background: #1c2238;
+  color: #d4af37;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+.expiry-tab strong {
+  color: #ffffff;
+}
+
+
 /* 🔵 Mobile Optimisation */
 @media (max-width: 480px) {
   body {
