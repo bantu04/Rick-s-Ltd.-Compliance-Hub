@@ -37,9 +37,7 @@
     <p>Disposal Date: <strong id="disposal-date"></strong></p>
   </div>
   <div class="disposal-alerts">
-    <h3>🗑️ Disposal Reminders</h3>
-    <ul id="disposal-list"></ul>
-    <p id="today-expiry" style="color:#ff4d4d; font-weight: bold;"></p>
+    <p>🗑️ <strong>Today:</strong> Dispose items with code <strong id="reminder-code"></strong></p>
   </div>
 
 
@@ -95,38 +93,21 @@
 </script>
 
 <script>
-  const disposalList = document.getElementById("disposal-list");
-  const todayText = document.getElementById("today-expiry");
+  function generateTCode(date) {
+    const dayCode = date.toLocaleDateString('en-GB', { weekday: 'short' })[0].toUpperCase();
+    const sum = date.getDate() + (date.getMonth() + 1); // month is 0-indexed
+    return `${dayCode}${sum}`;
+  }
+
   const today = new Date();
+  const cooked = new Date();
+  cooked.setDate(today.getDate() - 3);
 
-  function getCode(date) {
-    const tCode = date.toLocaleDateString('en-GB', { weekday: 'short' })[0].toUpperCase() +
-                  (date.getDate() + (date.getMonth() + 1));
-    return tCode;
-  }
+  const cookedCode = generateTCode(cooked);
+  const disposalCode = generateTCode(today);
 
-  for (let i = 4; i > 0; i--) {
-    const cooked = new Date();
-    cooked.setDate(today.getDate() - i);
-    const disposal = new Date(cooked);
-    disposal.setDate(cooked.getDate() + 2);
-
-    const cookedCode = getCode(cooked);
-    const disposalCode = getCode(disposal);
-    const fullDisposalDate = disposal.toLocaleDateString('en-GB', {
-      weekday: 'short', day: 'numeric', month: 'short'
-    });
-
-    const codeCombo = `${cookedCode}${disposalCode}`;
-    const li = document.createElement("li");
-    li.textContent = `${codeCombo} — Bin on ${fullDisposalDate}`;
-    disposalList.appendChild(li);
-
-    const isToday = disposal.toDateString() === today.toDateString();
-    if (isToday) {
-      todayText.innerText = `⚠️ Today: Dispose items with code ${codeCombo}`;
-    }
-  }
+  const combined = cookedCode + disposalCode;
+  document.getElementById("reminder-code").textContent = combined;
 </script>
 
 
