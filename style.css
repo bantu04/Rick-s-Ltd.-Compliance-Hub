@@ -291,7 +291,8 @@ body.login-only {
   margin-bottom: 1rem;
   font-size: 1rem;
 }
-.disposal-alerts strong {
+
+.disposal-alerts span {
   color: #000;
 }
 
