@@ -36,6 +36,11 @@
     <p>Cooked Date: <strong id="cook-date"></strong></p>
     <p>Disposal Date: <strong id="disposal-date"></strong></p>
   </div>
+  <div class="disposal-alerts">
+    <h3>🗑️ Disposal Reminders</h3>
+    <ul id="disposal-list"></ul>
+    <p id="today-expiry" style="color:#ff4d4d; font-weight: bold;"></p>
+  </div>
 
 
   <div class="form-grid">
@@ -48,11 +53,14 @@
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScO7xIG44nDlKoi4ZfL8oy9vf6rVUVIfz-XV_JwR8ZeM9KblQ/viewform?usp=header" class="form-card" target="_blank">
       <i class="fas fa-broom"></i> Toilet Cleaning Check
     </a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdUmVpwII0XWN_VmbHZ2nQfJjnqjau7XUQoRVBtkHcV1ZeS7g/viewform?usp=header" class="form-card" target="_blank">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf_DjIjtYYILVJCqaKTy0Jsqsm8d9Xr6JTzKaaOpBfODzYN1A/viewform?usp=preview" class="form-card" target="_blank">
       <i class="fas fa-door-open"></i> Opening Checklist
     </a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSdUmVpwII0XWN_VmbHZ2nQfJjnqjau7XUQoRVBtkHcV1ZeS7g/viewform?usp=preview" class="form-card" target="_blank" >
       <i class="fas fa-door-closed"></i> Closing Checklist
+    </a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdUmVpwII0XWN_VmbHZ2nQfJjnqjau7XUQoRVBtkHcV1ZeS7g/viewform?usp=preview" class="form-card" target="_blank" >
+      <i class="fas fa-door-closed"></i> Wastage Form
     </a>
   </div>
 
@@ -84,6 +92,41 @@
   
     document.getElementById("cook-date").textContent = formatTCodeWithFullDate(today);
     document.getElementById("disposal-date").textContent = formatTCodeWithFullDate(disposal);
+</script>
+
+<script>
+  const disposalList = document.getElementById("disposal-list");
+  const todayText = document.getElementById("today-expiry");
+  const today = new Date();
+
+  function getCode(date) {
+    const tCode = date.toLocaleDateString('en-GB', { weekday: 'short' })[0].toUpperCase() +
+                  (date.getDate() + (date.getMonth() + 1));
+    return tCode;
+  }
+
+  for (let i = 4; i > 0; i--) {
+    const cooked = new Date();
+    cooked.setDate(today.getDate() - i);
+    const disposal = new Date(cooked);
+    disposal.setDate(cooked.getDate() + 2);
+
+    const cookedCode = getCode(cooked);
+    const disposalCode = getCode(disposal);
+    const fullDisposalDate = disposal.toLocaleDateString('en-GB', {
+      weekday: 'short', day: 'numeric', month: 'short'
+    });
+
+    const codeCombo = `${cookedCode}${disposalCode}`;
+    const li = document.createElement("li");
+    li.textContent = `${codeCombo} — Bin on ${fullDisposalDate}`;
+    disposalList.appendChild(li);
+
+    const isToday = disposal.toDateString() === today.toDateString();
+    if (isToday) {
+      todayText.innerText = `⚠️ Today: Dispose items with code ${codeCombo}`;
+    }
+  }
 </script>
 
 
