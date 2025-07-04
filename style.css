@@ -282,6 +282,19 @@ body.login-only {
   color: #ffffff;
 }
 
+.disposal-alerts {
+  background: #ffeded;
+  color: #d8000c;
+  padding: 1rem;
+  border-left: 6px solid #d8000c;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.disposal-alerts strong {
+  color: #000;
+}
+
 
 /* 🔵 Mobile Optimisation */
 @media (max-width: 480px) {
