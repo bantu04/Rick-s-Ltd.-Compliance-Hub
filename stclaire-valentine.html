@@ -16,7 +16,7 @@
       } else {
         document.body.style.display = "block";
       }
-  
+
       window.addEventListener("pageshow", event => {
         const navType = performance.getEntriesByType("navigation")[0]?.type;
         if (!sessionStorage.getItem("loggedIn") || navType === "back_forward" || event.persisted) {
@@ -39,7 +39,6 @@
   <div class="disposal-alerts">
     <p>🗑️ <strong>Today:</strong> Dispose items with code <strong id="reminder-code"></strong></p>
   </div>
-
 
   <div class="form-grid">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5Q-cNTZkM6eKG_miBwT0GN23rMjpruxF-v7OpGLByExUibg/viewform?usp=header" class="form-card" target="_blank">
@@ -71,6 +70,7 @@
       window.location.href = "index.html";
     });
   </script>
+
   <script>
     function formatTCodeWithFullDate(date) {
       const dayCode = date.toLocaleDateString('en-GB', { weekday: 'short' })[0].toUpperCase();
@@ -83,33 +83,34 @@
       });
       return `${tCode} – ${fullDate}`;
     }
-  
+
     const today = new Date();
     const disposal = new Date();
-    disposal.setDate(today.getDate() + 2);
-  
+    disposal.setDate(today.getDate() + 2); // Using +2 as per user requirement
+
     document.getElementById("cook-date").textContent = formatTCodeWithFullDate(today);
     document.getElementById("disposal-date").textContent = formatTCodeWithFullDate(disposal);
-</script>
+  </script>
 
-<script>
-  function generateTCode(date) {
-    const dayCode = date.toLocaleDateString('en-GB', { weekday: 'short' })[0].toUpperCase();
-    const sum = date.getDate() + (date.getMonth() + 1); // month is 0-indexed
-    return `${dayCode}${sum}`;
-  }
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      function generateTCode(date) {
+        const dayCode = date.toLocaleDateString('en-GB', { weekday: 'short' })[0].toUpperCase();
+        const sum = date.getDate() + (date.getMonth() + 1);
+        return `${dayCode}${sum}`;
+      }
 
-  const today = new Date();
-  const cooked = new Date();
-  cooked.setDate(today.getDate() - 3);
+      const today = new Date();
+      const cooked = new Date();
+      cooked.setDate(today.getDate() - 3);
 
-  const cookedCode = generateTCode(cooked);
-  const disposalCode = generateTCode(today);
+      const cookedCode = generateTCode(cooked);
+      const disposalCode = generateTCode(today);
 
-  const combined = cookedCode + disposalCode;
-  document.getElementById("reminder-code").textContent = combined;
-</script>
-
-
+      const combined = cookedCode + disposalCode;
+      const target = document.getElementById("reminder-code");
+      if (target) target.textContent = combined;
+    });
+  </script>
 </body>
 </html>
