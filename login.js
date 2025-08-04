@@ -42,7 +42,8 @@ function handleLogin(e) {
   const password = document.getElementById("password").value.trim();
   const errorMsg = document.getElementById("error-msg");
 
-  const user = users.find(u => u.email.toLowerCase() === email && u.password === password);
+  const user = users.find(u =>
+  (u.email.toLowerCase() === email || u.name.toLowerCase() === email) && u.password === password);
   
   if (!user) {
     errorMsg.innerText = "Invalid credentials.";
