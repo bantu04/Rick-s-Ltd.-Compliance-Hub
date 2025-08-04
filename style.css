@@ -116,8 +116,8 @@ body.login-only {
 }
 
 .header img {
-  width: 40px;
-  height: 40px;
+  width: 80px;
+  height: 60px;
   object-fit: contain;
   border-radius: 50%;
 }
